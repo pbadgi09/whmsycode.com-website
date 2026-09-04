@@ -16,6 +16,18 @@ export function iconMarkup(name) {
   return ICONS[name] || ICONS.spark;
 }
 
+// Content here comes from content.json/apps/manifest.json (edited by hand or
+// via the WHMSYCODE Mac app), not visitor input — but it's still arbitrary
+// text getting inserted via innerHTML below, so an app description or title
+// containing "&", "<", or ">" needs escaping or it silently breaks the
+// markup (or worse, injects unintended elements) instead of just displaying
+// those characters.
+function escapeHTML(value) {
+  const div = document.createElement("div");
+  div.textContent = value ?? "";
+  return div.innerHTML;
+}
+
 async function fetchJSON(path) {
   const res = await fetch(path, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to load ${path}: ${res.status}`);
@@ -39,10 +51,29 @@ function setSrc(id, value, alt) {
   if (alt != null) el.setAttribute("alt", alt);
 }
 
+// The nav's single "Download" CTA has to pick one store link — defaulting
+// it to appStoreUrl unconditionally would silently send Android visitors to
+// an iOS link. A simple UA check is enough here (this only decides which of
+// two already-public store links a button points at, not anything
+// security- or correctness-sensitive enough to need a real feature-detection
+// library).
+function preferredStoreUrl(content) {
+  const isAndroid = /Android/i.test(navigator.userAgent || "");
+  if (isAndroid && content.googlePlayUrl) return content.googlePlayUrl;
+  return content.appStoreUrl;
+}
+
 function applySupportEmail(email) {
   if (!email) return;
   document.querySelectorAll("[data-support-email]").forEach((el) => {
     el.setAttribute("href", `mailto:${email}`);
+    // A couple of links (the legal pages' "Contact us at <email>" line) show
+    // the address itself as the link text, not a generic label like
+    // "Support" — those opt in via this second attribute so their visible
+    // text stays in sync with the href instead of going stale.
+    if (el.hasAttribute("data-support-email-text")) {
+      el.textContent = email;
+    }
   });
 }
 
@@ -97,14 +128,16 @@ export async function renderHome() {
     return;
   }
   grid.innerHTML = apps
-    .map(
-      (app) => `
-      <a class="app-card" href="/${app.slug}">
-        <div class="app-card-icon">${app.icon || app.title.slice(0, 2).toUpperCase()}</div>
-        <h3 class="app-card-title">${app.title}</h3>
-        <p class="app-card-desc">${app.tagline}</p>
-      </a>`
-    )
+    .map((app) => {
+      const slug = encodeURIComponent(app.slug || "");
+      const icon = escapeHTML(app.icon || (app.title || "").slice(0, 2).toUpperCase());
+      return `
+      <a class="app-card" href="/${slug}">
+        <div class="app-card-icon" aria-hidden="true">${icon}</div>
+        <h3 class="app-card-title">${escapeHTML(app.title)}</h3>
+        <p class="app-card-desc">${escapeHTML(app.tagline)}</p>
+      </a>`;
+    })
     .join("");
 }
 
@@ -128,7 +161,7 @@ export async function renderApp() {
   setText("hero-subtitle", content.subtitle);
   setHref("store-apple", content.appStoreUrl);
   setHref("store-google", content.googlePlayUrl);
-  setHref("nav-download", content.appStoreUrl);
+  setHref("nav-download", preferredStoreUrl(content));
   setSrc("hero-phone-img", content.heroImage, `${content.title} app mockup`);
   setSrc("hero-16x9-img", content.sixteenNineImage, `${content.title} screenshot`);
 
@@ -142,9 +175,9 @@ export async function renderApp() {
       .map(
         (f) => `
         <div class="app-card feature-card">
-          <div class="feature-icon">${iconMarkup(f.icon)}</div>
-          <h3 class="app-card-title">${f.title}</h3>
-          <p class="app-card-desc">${f.description}</p>
+          <div class="feature-icon" aria-hidden="true">${iconMarkup(f.icon)}</div>
+          <h3 class="app-card-title">${escapeHTML(f.title)}</h3>
+          <p class="app-card-desc">${escapeHTML(f.description)}</p>
         </div>`
       )
       .join("");
@@ -169,7 +202,7 @@ export async function renderLegal(kind) {
   if (data != null) {
     setText("legal-updated", `Last updated: ${data.updated}`);
     container.innerHTML = (data.sections || [])
-      .map((s) => `<h2>${s.heading}</h2><p>${s.body}</p>`)
+      .map((s) => `<h2>${escapeHTML(s.heading)}</h2><p>${escapeHTML(s.body)}</p>`)
       .join("");
   }
 

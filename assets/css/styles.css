@@ -402,6 +402,14 @@ button:focus-visible {
   font-size: 0.95rem;
 }
 
+/* Feature cards share .app-card's look but aren't links — the hover
+   lift/glow otherwise implies clickability where nothing happens on click. */
+.feature-card:hover {
+  transform: none;
+  border-color: var(--color-border);
+  box-shadow: none;
+}
+
 /* ---------- Content page (terms/privacy) ---------- */
 .content-page {
   padding: var(--space-5) 0 var(--space-6);

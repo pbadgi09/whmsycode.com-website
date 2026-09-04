@@ -46,6 +46,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* allows intentional visual bleed (e.g. .hero-phone) without a page scrollbar */
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
@@ -207,6 +208,47 @@ button:focus-visible {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Tall/rotated phone-photo variant of the hero blob, used on app pages with a vertical mockup */
+.hero-media--phone::before {
+  inset: -8% 0% -8% 18%;
+  border-radius: 45% 55% 60% 40% / 55% 45% 55% 45%;
+}
+@media (max-width: 900px) {
+  .hero-media--phone::before { inset: -6% 8%; }
+}
+
+.hero-phone {
+  position: relative;
+  z-index: 1;
+  max-width: 320px;
+  margin: 0 auto;
+}
+.hero-phone img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px -20px rgba(23, 20, 18, 0.35);
+  transform: rotate(-6deg);
+}
+/* Allow the tilted phone to bleed slightly past its column on wide screens */
+@media (min-width: 901px) {
+  .hero-phone {
+    max-width: 360px;
+    margin-inline-start: auto;
+    margin-inline-end: -2rem;
+  }
+}
+/* Keep it fully contained (no bleed, gentler tilt) on narrow screens to avoid horizontal scroll */
+@media (max-width: 480px) {
+  .hero-phone { max-width: 240px; }
+  .hero-phone img { transform: rotate(-3deg); }
+}
+
+/* ---------- Section media (standalone 16:9 showcase) ---------- */
+.section-media {
+  padding: var(--space-4) 0 var(--space-6);
 }
 
 /* ---------- Section ---------- */

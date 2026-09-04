@@ -1,0 +1,91 @@
+{
+  "title": "Editor Compressor",
+  "eyebrow": "Editor Compressor",
+  "heroTitleLine1": "Compress it.",
+  "heroTitleLine2": "Keep the quality.",
+  "subtitle": "Trim, resize, and compress your photos and videos in seconds — entirely on your device. No uploads, no watermarks, no waiting.",
+  "appStoreUrl": "#",
+  "googlePlayUrl": "#",
+  "heroImage": "img/mockup-vertical.jpg",
+  "sixteenNineImage": "img/screenshot-16x9.svg",
+  "features": [
+    {
+      "icon": "trim",
+      "title": "Trim in seconds",
+      "description": "Cut photos and videos down to exactly the part you need, with a simple drag-to-trim editor."
+    },
+    {
+      "icon": "compress",
+      "title": "Smart compression",
+      "description": "Shrink file sizes dramatically while keeping the detail that matters — perfect for sharing."
+    },
+    {
+      "icon": "device",
+      "title": "100% on-device",
+      "description": "Nothing leaves your phone. No uploads, no accounts, no waiting on a server."
+    }
+  ],
+  "supportEmail": "hello@whmsycode.com",
+  "terms": {
+    "updated": "[PLACEHOLDER DATE]",
+    "sections": [
+      {
+        "heading": "1. Acceptance of terms",
+        "body": "By downloading or using Editor Compressor (\"the App\"), published by WHMSYCODE (\"we\", \"us\"), you agree to these Terms of Use. If you do not agree, do not use the App."
+      },
+      {
+        "heading": "2. Use of the app",
+        "body": "You may use the App for personal, non-commercial purposes in accordance with these terms and applicable law. You are responsible for the content you edit, compress, or export using the App."
+      },
+      {
+        "heading": "3. Intellectual property",
+        "body": "The App, including its design, code, and branding, is owned by WHMSYCODE. You retain all rights to the photos and videos you process with the App."
+      },
+      {
+        "heading": "4. Disclaimer of warranties",
+        "body": "The App is provided \"as is\" without warranties of any kind, express or implied."
+      },
+      {
+        "heading": "5. Limitation of liability",
+        "body": "WHMSYCODE is not liable for any indirect, incidental, or consequential damages arising from your use of the App."
+      },
+      {
+        "heading": "6. Changes to these terms",
+        "body": "We may update these terms from time to time. Continued use of the App after changes constitutes acceptance of the updated terms."
+      }
+    ]
+  },
+  "privacy": {
+    "updated": "[PLACEHOLDER DATE]",
+    "sections": [
+      {
+        "heading": "1. Overview",
+        "body": "Editor Compressor processes your photos and videos entirely on your device. We do not upload your media to any server."
+      },
+      {
+        "heading": "2. Information we collect",
+        "body": "[PLACEHOLDER: list any data collected, e.g. crash logs, analytics, purchase receipts — or state clearly that none is collected.]"
+      },
+      {
+        "heading": "3. How we use information",
+        "body": "[PLACEHOLDER: explain how any collected data is used, e.g. to fix bugs, improve the app, process purchases.]"
+      },
+      {
+        "heading": "4. Third-party services",
+        "body": "[PLACEHOLDER: list any third-party SDKs used, e.g. Apple/Google in-app purchase, crash reporting, and link to their policies.]"
+      },
+      {
+        "heading": "5. Data retention and deletion",
+        "body": "[PLACEHOLDER: describe how long data is kept and how a user can request deletion.]"
+      },
+      {
+        "heading": "6. Children's privacy",
+        "body": "Editor Compressor is not directed at children under 13, and we do not knowingly collect personal information from children."
+      },
+      {
+        "heading": "7. Changes to this policy",
+        "body": "We may update this policy from time to time. Continued use of the App after changes constitutes acceptance of the updated policy."
+      }
+    ]
+  }
+}

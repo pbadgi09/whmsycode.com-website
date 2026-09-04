@@ -19,59 +19,76 @@
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
-  <header class="container">
-    <nav class="nav">
-      <a class="nav-brand" href="/">WHMSYCODE</a>
-      <div class="nav-links">
-        <a href="/#apps">Apps</a>
-        <a href="mailto:hello@whmsycode.com">Contact</a>
-        <a class="btn-primary" href="/#apps">See our apps</a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- PLACEHOLDER: replace hello@whmsycode.com everywhere with your real support/contact address -->
-  <main>
-    <section class="container hero">
-      <div class="hero-copy">
-        <p class="hero-eyebrow">Indie app studio</p>
-        <h1 class="hero-title">Small apps.<br><em>Big focus.</em></h1>
-        <p class="hero-subtitle">
-          WHMSYCODE is a one-person studio building simple, useful apps for iOS and Android.
-          No bloat, no dark patterns — just tools that do one thing well.
-        </p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="/editor-compressor">Explore Editor Compressor</a>
-          <a class="btn-secondary" href="#apps">All apps</a>
-        </div>
-      </div>
-      <div class="hero-media">
-        <div class="hero-media-frame">
-          <img src="/editor-compressor/img/hero.svg" alt="Preview of the Editor Compressor app" width="1600" height="900" fetchpriority="high">
-        </div>
-      </div>
-    </section>
-
-    <section id="apps" class="container section">
-      <h2 class="section-heading">Apps</h2>
-      <div class="app-grid">
-        <a class="app-card" href="/editor-compressor">
-          <div class="app-card-icon">EC</div>
-          <h3 class="app-card-title">Editor Compressor</h3>
-          <p class="app-card-desc">Trim, compress, and export your photos and videos in seconds — right on your device.</p>
+  <div class="page-card">
+    <header class="container">
+      <nav class="nav">
+        <a class="nav-brand" href="/">
+          <svg class="nav-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          WHMSYCODE
         </a>
-        <!-- Next app: duplicate an .app-card block above and link to /your-app-slug -->
-      </div>
-    </section>
-  </main>
+        <div class="nav-links">
+          <a href="/#apps">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Apps
+          </a>
+          <!-- PLACEHOLDER: replace hello@whmsycode.com everywhere with your real support/contact address -->
+          <a href="mailto:hello@whmsycode.com" data-support-email>
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact
+          </a>
+          <a class="btn-primary" href="/#apps">See our apps</a>
+        </div>
+      </nav>
+    </header>
 
-  <footer class="footer container">
-    <div class="footer-inner">
-      <p class="footer-copy">&copy; 2026 WHMSYCODE. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="mailto:hello@whmsycode.com">Contact</a>
+    <main>
+      <section class="container hero">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">Indie app studio</p>
+          <h1 class="hero-title">Small apps.<br><em>Big focus.</em></h1>
+          <p class="hero-subtitle">
+            WHMSYCODE is a one-person studio building simple, useful apps for iOS and Android.
+            No bloat, no dark patterns — just tools that do one thing well.
+          </p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="/editor-compressor">
+              <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Explore Editor Compressor
+            </a>
+            <a class="btn-secondary" href="#apps">All apps</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="hero-media-frame">
+            <img src="/editor-compressor/img/hero.svg" alt="Preview of the Editor Compressor app" width="1600" height="900" fetchpriority="high">
+          </div>
+        </div>
+      </section>
+
+      <section id="apps" class="container section">
+        <h2 class="section-heading">Apps</h2>
+        <div class="app-grid" id="apps-grid">
+          <p class="app-grid-error">Loading apps…</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <div class="footer-inner">
+        <p class="footer-copy">&copy; 2026 WHMSYCODE. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="mailto:hello@whmsycode.com" data-support-email>
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact
+          </a>
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { renderHome } from "/assets/js/content.js";
+    renderHome();
+  </script>
 </body>
 </html>

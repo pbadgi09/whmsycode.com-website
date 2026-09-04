@@ -19,91 +19,115 @@
 
   <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
-<body>
-  <header class="container">
-    <nav class="nav">
-      <a class="nav-brand" href="/">WHMSYCODE</a>
-      <div class="nav-links">
-        <a href="/#apps">Apps</a>
-        <a href="mailto:hello@whmsycode.com">Support</a>
-        <!-- PLACEHOLDER: point this at your real App Store URL once live -->
-        <a class="btn-primary" href="#">Download</a>
-      </div>
-    </nav>
-  </header>
+<body data-page="app">
+  <div class="page-card">
+    <header class="container">
+      <nav class="nav">
+        <a class="nav-brand" href="/">
+          <svg class="nav-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          WHMSYCODE
+        </a>
+        <div class="nav-links">
+          <a href="/#apps">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Apps
+          </a>
+          <a href="mailto:hello@whmsycode.com" data-support-email>
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Support
+          </a>
+          <!-- PLACEHOLDER: filled in from content.json's appStoreUrl once loaded -->
+          <a class="btn-primary" id="nav-download" href="#">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download
+          </a>
+        </div>
+      </nav>
+    </header>
 
-  <main>
-    <section class="container hero">
-      <div class="hero-copy">
-        <p class="hero-eyebrow">Editor Compressor</p>
-        <!-- PLACEHOLDER: real app title/subtitle -->
-        <h1 class="hero-title">Compress it.<br><em>Keep the quality.</em></h1>
-        <p class="hero-subtitle">
-          <!-- PLACEHOLDER: real "what the app does" description -->
-          Trim, resize, and compress your photos and videos in seconds — entirely on your device.
-          No uploads, no watermarks, no waiting.
-        </p>
-        <div class="hero-actions">
-          <div class="store-badges">
-            <!-- PLACEHOLDER: replace href="#" with your real App Store link -->
-            <a href="#" aria-label="Download on the App Store">
-              <img src="/assets/img/badges/app-store-badge.svg" alt="Download on the App Store" height="44">
-            </a>
-            <!-- PLACEHOLDER: replace href="#" with your real Google Play link -->
-            <a href="#" aria-label="Get it on Google Play">
-              <img src="/assets/img/badges/google-play-badge.png" alt="Get it on Google Play" height="44">
-            </a>
+    <main>
+      <section class="container hero">
+        <div class="hero-copy">
+          <p class="hero-eyebrow" id="hero-eyebrow">Editor Compressor</p>
+          <h1 class="hero-title">
+            <span id="hero-title-line1">Compress it.</span><br>
+            <em id="hero-title-line2">Keep the quality.</em>
+          </h1>
+          <p class="hero-subtitle" id="hero-subtitle">
+            Trim, resize, and compress your photos and videos in seconds — entirely on your device.
+            No uploads, no watermarks, no waiting.
+          </p>
+          <div class="hero-actions">
+            <div class="store-badges">
+              <a class="store-icon" id="store-apple" href="#" aria-label="Download on the App Store">
+                <svg viewBox="6 6 28 28" fill="currentColor" aria-hidden="true">
+                  <path d="M24.76888,20.30068a4.94881,4.94881,0,0,1,2.35656-4.15206,5.06566,5.06566,0,0,0-3.99116-2.15768c-1.67924-.17626-3.30719,1.00483-4.1629,1.00483-.87227,0-2.18977-.98733-3.6085-.95814a5.31529,5.31529,0,0,0-4.47292,2.72787c-1.934,3.34842-.49141,8.26947,1.3612,10.97608.9269,1.32535,2.01018,2.8058,3.42763,2.7533,1.38706-.05753,1.9051-.88448,3.5794-.88448,1.65876,0,2.14479.88448,3.591.8511,1.48838-.02416,2.42613-1.33124,3.32051-2.66914a10.962,10.962,0,0,0,1.51842-3.09251A4.78205,4.78205,0,0,1,24.76888,20.30068Z"/>
+                  <path d="M22.03725,12.21089a4.87248,4.87248,0,0,0,1.11452-3.49062,4.95746,4.95746,0,0,0-3.20758,1.65961,4.63634,4.63634,0,0,0-1.14371,3.36139A4.09905,4.09905,0,0,0,22.03725,12.21089Z"/>
+                </svg>
+              </a>
+              <a class="store-icon" id="store-google" href="#" aria-label="Get it on Google Play">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7,4 20,12 7,20"/></svg>
+              </a>
+              <span class="store-note">Available soon on iOS &amp; Android</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="hero-media hero-media--phone">
-        <div class="hero-phone">
-          <!-- PLACEHOLDER: temporary mockup photo, replace with a real transparent-background app screenshot mockup -->
-          <img src="img/mockup-vertical.jpg" alt="Editor Compressor app mockup" width="810" height="1656" fetchpriority="high">
+        <div class="hero-media hero-media--phone">
+          <svg class="squiggle" width="140" height="70" viewBox="0 0 140 70" style="left:-40px; bottom:-20px;" aria-hidden="true">
+            <path d="M2 40 Q 30 5, 55 35 T 110 30 T 136 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 9"/>
+          </svg>
+          <div class="hero-phone">
+            <!-- PLACEHOLDER: temporary mockup photo, replace with a real transparent-background app screenshot mockup -->
+            <img id="hero-phone-img" src="img/mockup-vertical.jpg" alt="Editor Compressor app mockup" width="810" height="1656" fetchpriority="high">
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="container section-media">
-      <div class="hero-media-frame">
-        <!-- PLACEHOLDER: replace with a real 16:9 app screenshot -->
-        <img src="img/screenshot-16x9.svg" alt="Editor Compressor before and after compression" width="1600" height="900" loading="lazy">
-      </div>
-    </section>
+      <section class="container section-media">
+        <div class="hero-media-frame">
+          <!-- PLACEHOLDER: replace with a real 16:9 app screenshot -->
+          <img id="hero-16x9-img" src="img/screenshot-16x9.svg" alt="Editor Compressor before and after compression" width="1600" height="900" loading="lazy">
+        </div>
+      </section>
 
-    <section class="container section">
-      <h2 class="section-heading">What it does</h2>
-      <div class="app-grid">
-        <!-- PLACEHOLDER: swap these three feature blurbs for your real feature list -->
-        <div class="app-card">
-          <div class="app-card-icon">01</div>
-          <h3 class="app-card-title">Trim in seconds</h3>
-          <p class="app-card-desc">Cut photos and videos down to exactly the part you need, with a simple drag-to-trim editor.</p>
+      <section class="container section">
+        <h2 class="section-heading">What it does</h2>
+        <div class="app-grid" id="features-grid">
+          <div class="app-card feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></div>
+            <h3 class="app-card-title">Trim in seconds</h3>
+            <p class="app-card-desc">Cut photos and videos down to exactly the part you need, with a simple drag-to-trim editor.</p>
+          </div>
+          <div class="app-card feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+            <h3 class="app-card-title">Smart compression</h3>
+            <p class="app-card-desc">Shrink file sizes dramatically while keeping the detail that matters — perfect for sharing.</p>
+          </div>
+          <div class="app-card feature-card">
+            <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+            <h3 class="app-card-title">100% on-device</h3>
+            <p class="app-card-desc">Nothing leaves your phone. No uploads, no accounts, no waiting on a server.</p>
+          </div>
         </div>
-        <div class="app-card">
-          <div class="app-card-icon">02</div>
-          <h3 class="app-card-title">Smart compression</h3>
-          <p class="app-card-desc">Shrink file sizes dramatically while keeping the detail that matters — perfect for sharing.</p>
-        </div>
-        <div class="app-card">
-          <div class="app-card-icon">03</div>
-          <h3 class="app-card-title">100% on-device</h3>
-          <p class="app-card-desc">Nothing leaves your phone. No uploads, no accounts, no waiting on a server.</p>
-        </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer class="footer container">
-    <div class="footer-inner">
-      <p class="footer-copy">&copy; 2026 WHMSYCODE. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="terms.html">Terms of Use</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="mailto:hello@whmsycode.com">Support</a>
-        <a href="/">WHMSYCODE</a>
+    <footer class="footer container">
+      <div class="footer-inner">
+        <p class="footer-copy">&copy; 2026 WHMSYCODE. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="terms.html">Terms of Use</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="mailto:hello@whmsycode.com" data-support-email>Support</a>
+          <a href="/">WHMSYCODE</a>
+        </div>
       </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
+
+  <script type="module">
+    import { renderApp } from "/assets/js/content.js";
+    renderApp();
+  </script>
 </body>
 </html>

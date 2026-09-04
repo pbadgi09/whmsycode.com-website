@@ -127,6 +127,10 @@ export async function renderHome() {
     console.error(err);
     return;
   }
+  if (apps.length === 0) {
+    grid.innerHTML = `<p class="app-grid-error">No apps published yet — check back soon.</p>`;
+    return;
+  }
   grid.innerHTML = apps
     .map((app) => {
       const slug = encodeURIComponent(app.slug || "");

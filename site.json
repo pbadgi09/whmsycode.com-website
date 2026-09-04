@@ -8,7 +8,7 @@
     "headlineLine2": "Big focus.",
     "subtitle": "WHMSYCODE is a one-person studio building simple, useful apps for iOS and Android. No bloat, no dark patterns — just tools that do one thing well."
   },
-  "heroImage": "editor-compressor/img/hero.svg",
+  "heroImage": "assets/img/homepage-hero.svg",
   "favicon": "assets/img/favicon.png",
   "ogImage": "assets/img/og-default.png"
 }

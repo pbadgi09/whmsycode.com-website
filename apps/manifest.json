@@ -1,8 +1,8 @@
 [
   {
-    "slug": "editor-compressor",
-    "title": "Editor Compressor",
-    "tagline": "Trim, compress, and export your photos and videos in seconds — right on your device.",
-    "icon": "EC"
+    "slug" : "editor-compressor",
+    "title" : "Editor Compressor",
+    "tagline" : "Trim, resize, and compress your photos and videos in seconds — entirely on your device. No uploads, no watermarks, no waiting.",
+    "icon" : "EC"
   }
 ]

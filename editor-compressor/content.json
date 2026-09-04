@@ -8,6 +8,7 @@
   "googlePlayUrl": "#",
   "heroImage": "img/mockup-vertical.jpg",
   "sixteenNineImage": "img/screenshot-16x9.svg",
+  "ogImage": "img/og-image.png",
   "features": [
     {
       "icon": "trim",
@@ -25,7 +26,7 @@
       "description": "Nothing leaves your phone. No uploads, no accounts, no waiting on a server."
     }
   ],
-  "supportEmail": "hello@whmsycode.com",
+  "supportEmail": "",
   "terms": {
     "updated": "[PLACEHOLDER DATE]",
     "sections": [

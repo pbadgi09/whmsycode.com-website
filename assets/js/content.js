@@ -1,7 +1,8 @@
 // Small vanilla JS content loader. No build step, no framework, no 3rd-party runtime calls.
-// Each page fetches its own JSON (apps/manifest.json for the homepage, ./content.json for an
-// app page) and fills in the DOM. Icons are hand-written inline SVGs (stroke/fill="currentColor")
-// kept centrally here so every page (and any future app page) can reuse the same set.
+// Every page fetches /site.json for shared chrome (nav brand, footer, default support email),
+// plus its own JSON where relevant (apps/manifest.json for the homepage, ./content.json for an
+// app/legal page). Icons are hand-written inline SVGs (stroke/fill="currentColor") kept
+// centrally here so every page (and any future app page) can reuse the same set.
 
 const ICONS = {
   trim: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>',
@@ -38,8 +39,53 @@ function setSrc(id, value, alt) {
   if (alt != null) el.setAttribute("alt", alt);
 }
 
-/** Homepage: fetch /apps/manifest.json and build the app-card grid. */
+function applySupportEmail(email) {
+  if (!email) return;
+  document.querySelectorAll("[data-support-email]").forEach((el) => {
+    el.setAttribute("href", `mailto:${email}`);
+  });
+}
+
+// Cached so multiple render* calls on the same page (e.g. renderApp also
+// needing site chrome) only fetch site.json once.
+let siteSettingsPromise = null;
+function fetchSiteSettings() {
+  if (siteSettingsPromise == null) {
+    siteSettingsPromise = fetchJSON("/site.json").catch((err) => {
+      console.error(err);
+      return null;
+    });
+  }
+  return siteSettingsPromise;
+}
+
+/**
+ * Shared chrome every page has: nav brand text, footer copyright text, and
+ * the site-wide default support email. Called internally by every page-level
+ * render function below before their own page-specific logic runs, so a
+ * page-specific override (an app's own supportEmail) always applies after
+ * — and wins over — this default.
+ */
+export async function renderSiteChrome() {
+  const site = await fetchSiteSettings();
+  if (site == null) return null;
+  document.querySelectorAll("[data-nav-brand]").forEach((el) => { el.textContent = site.navBrand; });
+  document.querySelectorAll("[data-footer-copyright]").forEach((el) => { el.textContent = site.footerCopyright; });
+  applySupportEmail(site.supportEmail);
+  return site;
+}
+
+/** Homepage: site.json for the hero, /apps/manifest.json for the app-card grid. */
 export async function renderHome() {
+  const site = await renderSiteChrome();
+  if (site != null) {
+    setText("hero-eyebrow", site.hero?.eyebrow);
+    setText("hero-title-line1", site.hero?.headlineLine1);
+    setText("hero-title-line2", site.hero?.headlineLine2);
+    setText("hero-subtitle", site.hero?.subtitle);
+    setSrc("hero-image", site.heroImage, "WHMSYCODE");
+  }
+
   const grid = document.getElementById("apps-grid");
   if (grid == null) return;
   let apps;
@@ -66,6 +112,8 @@ export async function renderHome() {
 export async function renderApp() {
   const root = document.body;
   if (root.dataset.page !== "app") return;
+  await renderSiteChrome();
+
   let content;
   try {
     content = await fetchJSON("./content.json");
@@ -84,12 +132,9 @@ export async function renderApp() {
   setSrc("hero-phone-img", content.heroImage, `${content.title} app mockup`);
   setSrc("hero-16x9-img", content.sixteenNineImage, `${content.title} screenshot`);
 
-  const supportLinks = document.querySelectorAll('[data-support-email]');
-  supportLinks.forEach((el) => {
-    if (content.supportEmail) {
-      el.setAttribute("href", `mailto:${content.supportEmail}`);
-    }
-  });
+  // Only overrides the site-wide default (already applied by
+  // renderSiteChrome above) when this app genuinely sets its own.
+  applySupportEmail(content.supportEmail);
 
   const featureGrid = document.getElementById("features-grid");
   if (featureGrid != null && Array.isArray(content.features)) {
@@ -108,6 +153,8 @@ export async function renderApp() {
 
 /** Legal pages (terms/privacy): fetch ./content.json and render the matching section. */
 export async function renderLegal(kind) {
+  await renderSiteChrome();
+
   const container = document.getElementById("legal-sections");
   if (container == null) return;
   let content;
@@ -119,15 +166,12 @@ export async function renderLegal(kind) {
     return;
   }
   const data = content[kind];
-  if (data == null) return;
+  if (data != null) {
+    setText("legal-updated", `Last updated: ${data.updated}`);
+    container.innerHTML = (data.sections || [])
+      .map((s) => `<h2>${s.heading}</h2><p>${s.body}</p>`)
+      .join("");
+  }
 
-  setText("legal-updated", `Last updated: ${data.updated}`);
-  container.innerHTML = (data.sections || [])
-    .map((s) => `<h2>${s.heading}</h2><p>${s.body}</p>`)
-    .join("");
-
-  const supportLinks = document.querySelectorAll('[data-support-email]');
-  supportLinks.forEach((el) => {
-    if (content.supportEmail) el.setAttribute("href", `mailto:${content.supportEmail}`);
-  });
+  applySupportEmail(content.supportEmail);
 }

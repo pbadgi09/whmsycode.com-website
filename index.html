@@ -24,7 +24,7 @@
       <nav class="nav">
         <a class="nav-brand" href="/">
           <svg class="nav-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          WHMSYCODE
+          <span data-nav-brand>WHMSYCODE</span>
         </a>
         <div class="nav-links">
           <a href="/#apps">
@@ -44,9 +44,12 @@
     <main>
       <section class="container hero">
         <div class="hero-copy">
-          <p class="hero-eyebrow">Indie app studio</p>
-          <h1 class="hero-title">Small apps.<br><em>Big focus.</em></h1>
-          <p class="hero-subtitle">
+          <p class="hero-eyebrow" id="hero-eyebrow">Indie app studio</p>
+          <h1 class="hero-title">
+            <span id="hero-title-line1">Small apps.</span><br>
+            <em id="hero-title-line2">Big focus.</em>
+          </h1>
+          <p class="hero-subtitle" id="hero-subtitle">
             WHMSYCODE is a one-person studio building simple, useful apps for iOS and Android.
             No bloat, no dark patterns — just tools that do one thing well.
           </p>
@@ -60,7 +63,7 @@
         </div>
         <div class="hero-media">
           <div class="hero-media-frame">
-            <img src="/editor-compressor/img/hero.svg" alt="Preview of the Editor Compressor app" width="1600" height="900" fetchpriority="high">
+            <img id="hero-image" src="/editor-compressor/img/hero.svg" alt="Preview of the WHMSYCODE studio" width="1600" height="900" fetchpriority="high">
           </div>
         </div>
       </section>
@@ -75,7 +78,7 @@
 
     <footer class="footer container">
       <div class="footer-inner">
-        <p class="footer-copy">&copy; 2026 WHMSYCODE. All rights reserved.</p>
+        <p class="footer-copy" data-footer-copyright>&copy; 2026 WHMSYCODE. All rights reserved.</p>
         <div class="footer-links">
           <a href="mailto:hello@whmsycode.com" data-support-email>
             <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>

@@ -129,6 +129,20 @@ export async function renderHome() {
     setText("hero-title-line2", site.hero?.headlineLine2);
     setText("hero-subtitle", site.hero?.subtitle);
     setSrc("hero-image", site.heroImage, "WHMSYCODE");
+
+    const whyUsGrid = document.getElementById("why-us-grid");
+    if (whyUsGrid != null && Array.isArray(site.whyUs)) {
+      whyUsGrid.innerHTML = site.whyUs
+        .map(
+          (item) => `
+          <div class="app-card feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">${iconMarkup(item.icon)}</div>
+            <h3 class="app-card-title">${escapeHTML(item.title)}</h3>
+            <p class="app-card-desc">${escapeHTML(item.description)}</p>
+          </div>`
+        )
+        .join("");
+    }
   }
 
   const grid = document.getElementById("apps-grid");

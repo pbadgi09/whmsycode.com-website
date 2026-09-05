@@ -10,5 +10,22 @@
   },
   "heroImage": "assets/img/homepage-hero.svg",
   "favicon": "assets/img/favicon.png",
-  "ogImage": "assets/img/og-default.png"
+  "ogImage": "assets/img/og-default.png",
+  "whyUs": [
+    {
+      "icon": "shield",
+      "title": "Privacy by default",
+      "description": "No tracking, no ad networks, no data you didn't ask to share. What happens on your device stays on your device."
+    },
+    {
+      "icon": "spark",
+      "title": "Made with care",
+      "description": "Every app is built and maintained by one person, not a growth team — small enough to actually get better over time."
+    },
+    {
+      "icon": "device",
+      "title": "No bloat, ever",
+      "description": "No subscriptions you forgot about, no dark patterns nudging you into upsells. Just tools that do one thing well."
+    }
+  ]
 }

@@ -41,6 +41,8 @@
 
   --max-width: 1200px;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-base: 0.4s;
+  --duration-slow: 0.8s;
 }
 
 /* ---------- Reset ---------- */
@@ -124,6 +126,7 @@ button:focus-visible {
   gap: 0.4rem;
   font-size: 0.95rem;
   color: var(--color-text-dim);
+  transition: color 0.2s var(--ease-out);
 }
 .nav-links a:not(.btn-primary):hover { color: var(--color-text); }
 .nav-links .icon-sm { width: 16px; height: 16px; }
@@ -154,6 +157,7 @@ button:focus-visible {
   transform: translateY(-2px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 8px 20px -4px var(--color-accent-glow);
 }
+.btn-primary:active { transform: translateY(-1px) scale(0.97); }
 
 .btn-secondary {
   display: inline-flex;
@@ -174,6 +178,7 @@ button:focus-visible {
   color: var(--color-accent-dim);
   transform: translateY(-2px);
 }
+.btn-secondary:active { transform: translateY(-1px) scale(0.97); }
 
 /* ---------- Store icon buttons (circular, replaces wide badges) ---------- */
 .store-badges {
@@ -265,6 +270,18 @@ button:focus-visible {
   gap: var(--space-3);
 }
 
+/* A one-time entrance on load (not scroll-triggered — the hero is already
+   above the fold), copy first then media, so the page feels like it's
+   settling into place rather than appearing all at once. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy { animation: heroFadeUp var(--duration-slow) var(--ease-out) both; }
+  .hero-media { animation: heroFadeUp var(--duration-slow) var(--ease-out) 0.15s both; }
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .hero-media {
   position: relative;
 }
@@ -277,6 +294,19 @@ button:focus-visible {
   z-index: 0;
   filter: blur(10px);
 }
+/* A slow, gentle drift on the glow blob — the one animation that's always
+   running rather than triggered by scroll/hover, so it reads as ambient
+   life behind the hero rather than a one-shot effect. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-media::before {
+    animation: heroGlowFloat 12s var(--ease-out) infinite;
+  }
+}
+@keyframes heroGlowFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-3%, 4%) scale(1.06); }
+}
+
 .hero-media-frame {
   position: relative;
   z-index: 1;
@@ -286,11 +316,27 @@ button:focus-visible {
   box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.6);
   background: var(--color-bg-elevated-2);
   border: 1px solid var(--color-border);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
 .hero-media-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* Homepage-only: a slight static tilt gives the abstract preview graphic
+   some of the same tactile, "photographed object" feel the app-page phone
+   mockup has, without pretending it's a real screenshot. Straightens
+   slightly on hover as a small interactive touch. */
+.hero-media-frame--tilt {
+  transform: rotate(-2deg);
+}
+.hero-media-frame--tilt:hover {
+  transform: rotate(-1deg) translateY(-4px);
+  box-shadow: 0 32px 70px -20px rgba(0, 0, 0, 0.65);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-media-frame--tilt,
+  .hero-media-frame--tilt:hover { transform: rotate(-2deg); }
 }
 
 /* Tall/rotated phone-photo variant of the hero glow, used on app pages with a vertical mockup */
@@ -472,6 +518,7 @@ button:focus-visible {
   gap: 0.35rem;
   font-size: 0.9rem;
   color: var(--color-text-dim);
+  transition: color 0.2s var(--ease-out);
 }
 .footer-links a:hover { color: var(--color-text); }
 .footer-links .icon-sm { width: 15px; height: 15px; }
@@ -482,6 +529,23 @@ button:focus-visible {
 
 /* ---------- Shared small icon utility ---------- */
 .icon-sm { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ---------- Scroll-reveal ---------- */
+/* Elements start fully visible — this is purely additive progressive
+   enhancement. assets/js/animations.js adds "reveal-pending" itself right
+   before it starts observing, so if JS never runs (blocked, fails, or the
+   browser lacks IntersectionObserver) content simply stays visible instead
+   of being silently hidden forever. */
+.reveal {
+  transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
+}
+.reveal.reveal-pending {
+  opacity: 0;
+  transform: translateY(24px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal.reveal-pending { opacity: 1; transform: none; transition: none; }
+}
 
 /* ---------- 404 ---------- */
 .error-page {
@@ -496,4 +560,13 @@ button:focus-visible {
   font-family: var(--font-display);
   font-weight: 800;
   font-size: clamp(2.5rem, 6vw, 4rem);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .error-page {
+    animation: errorPageIn var(--duration-slow) var(--ease-out) both;
+  }
+}
+@keyframes errorPageIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }

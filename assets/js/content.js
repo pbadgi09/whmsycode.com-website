@@ -136,7 +136,7 @@ export async function renderHome() {
       const slug = encodeURIComponent(app.slug || "");
       const icon = escapeHTML(app.icon || (app.title || "").slice(0, 2).toUpperCase());
       return `
-      <a class="app-card" href="/${slug}">
+      <a class="app-card reveal" href="/${slug}">
         <div class="app-card-icon" aria-hidden="true">${icon}</div>
         <h3 class="app-card-title">${escapeHTML(app.title)}</h3>
         <p class="app-card-desc">${escapeHTML(app.tagline)}</p>
@@ -178,7 +178,7 @@ export async function renderApp() {
     featureGrid.innerHTML = content.features
       .map(
         (f) => `
-        <div class="app-card feature-card">
+        <div class="app-card feature-card reveal">
           <div class="feature-icon" aria-hidden="true">${iconMarkup(f.icon)}</div>
           <h3 class="app-card-title">${escapeHTML(f.title)}</h3>
           <p class="app-card-desc">${escapeHTML(f.description)}</p>

@@ -62,15 +62,18 @@
           </div>
         </div>
         <div class="hero-media">
-          <div class="hero-media-frame">
+          <svg class="squiggle" width="140" height="70" viewBox="0 0 140 70" style="left:-30px; bottom:-24px;" aria-hidden="true">
+            <path d="M2 40 Q 30 5, 55 35 T 110 30 T 136 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 9"/>
+          </svg>
+          <div class="hero-media-frame hero-media-frame--tilt">
             <img id="hero-image" src="/assets/img/homepage-hero.svg" alt="Preview of the WHMSYCODE studio" width="1600" height="900" fetchpriority="high">
           </div>
         </div>
       </section>
 
       <section id="apps" class="container section">
-        <h2 class="section-heading">Apps</h2>
-        <div class="app-grid" id="apps-grid">
+        <h2 class="section-heading reveal">Apps</h2>
+        <div class="app-grid" id="apps-grid" data-reveal-stagger>
           <p class="app-grid-error">Loading apps…</p>
         </div>
       </section>
@@ -91,7 +94,8 @@
 
   <script type="module">
     import { renderHome } from "/assets/js/content.js";
-    renderHome();
+    import { initScrollReveal } from "/assets/js/animations.js";
+    renderHome().then(initScrollReveal);
   </script>
 </body>
 </html>

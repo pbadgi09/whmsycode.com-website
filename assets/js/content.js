@@ -1,19 +1,12 @@
 // Small vanilla JS content loader. No build step, no framework, no 3rd-party runtime calls.
 // Every page fetches /site.json for shared chrome (nav brand, footer, default support email),
 // plus its own JSON where relevant (apps/manifest.json for the homepage, ./content.json for an
-// app/legal page). Icons are hand-written inline SVGs (stroke/fill="currentColor") kept
-// centrally here so every page (and any future app page) can reuse the same set.
+// app/legal page). Feature/Why card icons are real uploaded images (see the WHMSYCODE Mac app),
+// not a fixed keyword set — rendered as a plain <img> sized via object-fit:contain in CSS.
 
-const ICONS = {
-  trim: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>',
-  compress: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>',
-  device: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
-  shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.7 8 11 4.6-2.3 8-6 8-11V5z"/></svg>',
-  spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>'
-};
-
-export function iconMarkup(name) {
-  return ICONS[name] || ICONS.spark;
+function iconMarkup(path) {
+  if (!path) return "";
+  return `<img src="${escapeHTML(path)}" alt="">`;
 }
 
 // Content here comes from content.json/apps/manifest.json (edited by hand or
@@ -129,6 +122,7 @@ export async function renderHome() {
     setText("hero-title-line2", site.hero?.headlineLine2);
     setText("hero-subtitle", site.hero?.subtitle);
     setSrc("hero-image", site.heroImage, "WHMSYCODE");
+    setText("why-us-title", site.whyUsTitle);
 
     const whyUsGrid = document.getElementById("why-us-grid");
     if (whyUsGrid != null && Array.isArray(site.whyUs)) {

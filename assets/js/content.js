@@ -6,7 +6,10 @@
 
 function iconMarkup(path) {
   if (!path) return "";
-  return `<img src="${escapeHTML(path)}" alt="">`;
+  // onerror removes a broken image (e.g. deleted from the repo but still
+  // referenced) instead of leaving a broken-image glyph in the icon box —
+  // same pattern badgip's own site uses for its social/logo icons.
+  return `<img src="${escapeHTML(path)}" alt="" onerror="this.remove()">`;
 }
 
 // Content here comes from content.json/apps/manifest.json (edited by hand or
@@ -14,11 +17,18 @@ function iconMarkup(path) {
 // text getting inserted via innerHTML below, so an app description or title
 // containing "&", "<", or ">" needs escaping or it silently breaks the
 // markup (or worse, injects unintended elements) instead of just displaying
-// those characters.
+// those characters. Also escapes quotes: iconMarkup() below embeds an
+// escaped value inside a src="..." attribute, not just text-node content,
+// and a bare textContent/innerHTML round-trip (the previous implementation)
+// doesn't escape quote characters — only safe for text nodes, not
+// attribute values.
 function escapeHTML(value) {
-  const div = document.createElement("div");
-  div.textContent = value ?? "";
-  return div.innerHTML;
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 async function fetchJSON(path) {
@@ -124,8 +134,15 @@ export async function renderHome() {
     setSrc("hero-image", site.heroImage, "WHMSYCODE");
     setText("why-us-title", site.whyUsTitle);
 
+    const whyUsSection = document.getElementById("why-us-section");
     const whyUsGrid = document.getElementById("why-us-grid");
     if (whyUsGrid != null && Array.isArray(site.whyUs)) {
+      // An admin deleting every Why-card is a real, supported state (not an
+      // error) — hide the whole section rather than leaving a heading with
+      // a blank, oddly-empty grid underneath it.
+      if (whyUsSection != null) {
+        whyUsSection.style.display = site.whyUs.length ? "" : "none";
+      }
       whyUsGrid.innerHTML = site.whyUs
         .map(
           (item) => `
@@ -205,8 +222,15 @@ export async function renderApp() {
     url: window.location.href,
   });
 
+  const featuresSection = document.getElementById("features-section");
   const featureGrid = document.getElementById("features-grid");
   if (featureGrid != null && Array.isArray(content.features)) {
+    // Same reasoning as the homepage's Why-section: zero features is a
+    // real, supported state, not an error — hide the section instead of
+    // leaving "What it does" with a blank grid underneath it.
+    if (featuresSection != null) {
+      featuresSection.style.display = content.features.length ? "" : "none";
+    }
     featureGrid.innerHTML = content.features
       .map(
         (f) => `

@@ -459,7 +459,6 @@ html { scrollbar-color: var(--color-border-strong) transparent; scrollbar-width:
   font-size: 1.25rem;
   color: var(--color-accent);
 }
-.feature-icon svg { width: 24px; height: 24px; }
 /* Card icons are now uploaded images, not a fixed icon set — sized to fit
    within the existing 48px box (object-fit:contain = "aspect fit") rather
    than stretching or cropping whatever aspect ratio gets uploaded. */

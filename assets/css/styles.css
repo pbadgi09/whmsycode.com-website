@@ -76,6 +76,17 @@ button:focus-visible {
 }
 ::selection { background: var(--color-accent); color: #04140c; }
 
+/* ---------- Scrollbar ---------- */
+html { scrollbar-color: var(--color-border-strong) transparent; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent-dim); }
+
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -94,11 +105,27 @@ button:focus-visible {
 }
 
 /* ---------- Nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--color-surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border);
+}
+/* .page-card's own border-radius + overflow:hidden clips this to match
+   the rounded top corners automatically — no extra rounding needed here. */
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-3) 0;
+  /* padding-top/bottom only (not the shorthand) — .nav is combined with
+     .container directly on the same element for the sticky header, and a
+     `padding` shorthand here would silently overwrite .container's
+     horizontal padding since both rules have equal specificity. */
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
 }
 .nav-brand {
   display: inline-flex;
@@ -446,6 +473,27 @@ button:focus-visible {
 .app-grid-error {
   color: var(--color-text-faint);
   font-size: 0.95rem;
+}
+
+/* ---------- Loading skeleton ---------- */
+.skeleton-card {
+  height: 180px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-elevated-2) 25%,
+    var(--color-bg-elevated) 37%,
+    var(--color-bg-elevated-2) 63%
+  );
+  background-size: 400% 100%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton-card { animation: skeletonShimmer 1.6s ease infinite; }
+}
+@keyframes skeletonShimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
 }
 
 /* Feature cards share .app-card's look but aren't links — the hover

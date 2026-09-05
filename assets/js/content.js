@@ -63,6 +63,20 @@ function preferredStoreUrl(content) {
   return content.appStoreUrl;
 }
 
+// Creates the <script type="application/ld+json"> tag on first use if the
+// page didn't already declare one, rather than requiring every app-page
+// template to pre-declare a placeholder — keeps this self-contained here.
+function setJSONLD(id, data) {
+  let el = document.getElementById(id);
+  if (el == null) {
+    el = document.createElement("script");
+    el.type = "application/ld+json";
+    el.id = id;
+    document.head.appendChild(el);
+  }
+  el.textContent = JSON.stringify(data);
+}
+
 function applySupportEmail(email) {
   if (!email) return;
   document.querySelectorAll("[data-support-email]").forEach((el) => {
@@ -172,6 +186,16 @@ export async function renderApp() {
   // Only overrides the site-wide default (already applied by
   // renderSiteChrome above) when this app genuinely sets its own.
   applySupportEmail(content.supportEmail);
+
+  setJSONLD("app-jsonld", {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: content.title,
+    description: content.subtitle,
+    applicationCategory: "MobileApplication",
+    operatingSystem: "iOS, Android",
+    url: window.location.href,
+  });
 
   const featureGrid = document.getElementById("features-grid");
   if (featureGrid != null && Array.isArray(content.features)) {

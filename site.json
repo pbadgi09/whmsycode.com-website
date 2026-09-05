@@ -1,32 +1,31 @@
 {
-  "navBrand": "WHMSYCODE",
-  "footerCopyright": "© 2026 WHMSYCODE. All rights reserved.",
-  "supportEmail": "hello@whmsycode.com",
-  "hero": {
-    "eyebrow": "Indie app studio",
-    "headlineLine1": "Small apps.",
-    "headlineLine2": "Big focus.",
-    "subtitle": "WHMSYCODE is a one-person studio building simple, useful apps for iOS and Android. No bloat, no dark patterns — just tools that do one thing well."
+  "favicon" : "\/assets\/img\/favicon.png",
+  "footerCopyright" : "© 2026 WHMSYCODE. All rights reserved.",
+  "hero" : {
+    "eyebrow" : "Indie app developer",
+    "headlineLine1" : "Small apps.",
+    "headlineLine2" : "Big focus.",
+    "subtitle" : "WHMSYCODE is a one-person “team” building simple, useful apps for iOS and Android. No bloat, no ads, no dark patterns — just tools that do one thing well."
   },
-  "heroImage": "/assets/img/homepage-hero.svg",
-  "favicon": "/assets/img/favicon.png",
-  "ogImage": "/assets/img/og-default.png",
-  "whyUsTitle": "Why WHMSYCODE",
-  "whyUs": [
+  "heroImage" : "\/assets\/img\/homepage-hero.svg",
+  "navBrand" : "WHMSYCODE",
+  "ogImage" : "\/assets\/img\/og-default.png",
+  "supportEmail" : "hello@whmsycode.com",
+  "whyUs" : [
     {
-      "icon": "",
-      "title": "Privacy by default",
-      "description": "No tracking, no ad networks, no data you didn't ask to share. What happens on your device stays on your device."
+      "description" : "No tracking, no ad networks, no data you didn't ask to share. What happens on your device stays on your device.",
+      "icon" : "",
+      "title" : "Privacy by default"
     },
     {
-      "icon": "",
-      "title": "Made with care",
-      "description": "Every app is built and maintained by one person, not a growth team — small enough to actually get better over time."
+      "description" : "Every app is built and maintained by one person, not a growth team — small enough to actually get better over time.",
+      "icon" : "",
+      "title" : "Made with care"
     },
     {
-      "icon": "",
-      "title": "No bloat, ever",
-      "description": "No subscriptions you forgot about, no dark patterns nudging you into upsells. Just tools that do one thing well."
+      "description" : "No subscriptions you forgot about, no dark patterns nudging you into upsells. Just tools that do one thing well.",
+      "icon" : "",
+      "title" : "No bloat, ever"
     }
   ]
 }
